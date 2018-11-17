@@ -4,17 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.dietician.error.PatientNotFoundException;
 import pl.dietician.model.Patient;
+import pl.dietician.model.Role;
 import pl.dietician.repository.PatientRepository;
+import pl.dietician.repository.RoleRepository;
 import pl.dietician.service.PatientService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PatientServiceImpl implements PatientService {
 
     @Autowired
     PatientRepository patientRepository;
+
+    @Autowired
+    RoleRepository roleRepository;
 
     @Override
     public Patient findByPesel(String pesel) {
@@ -82,5 +88,19 @@ public class PatientServiceImpl implements PatientService {
             }
         }
         return null;
+    }
+
+    @Override
+    public Patient save(Patient patient) {
+
+        Role role=roleRepository.findByName("ROLE_PATIENT");
+
+        Set<Role> patientRoles=patient.getRoles();
+
+        patientRoles.add(role);
+
+        patient.setRoles(patientRoles);
+
+        return patientRepository.saveAndFlush(patient);
     }
 }

@@ -47,4 +47,7 @@ public class BodyMeasurement {
     @Getter @Setter
     @Positive
     private double ffmMassKg;
+
+    @Positive
+    private double BMI;
 }

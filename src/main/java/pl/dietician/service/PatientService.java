@@ -13,4 +13,6 @@ public interface PatientService {
     List<Patient> findAllByLastName(String lastName);
 
     Patient findById(long id);
+
+    Patient save(Patient patient);
 }
