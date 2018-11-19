@@ -63,7 +63,7 @@ public class PatientServiceImpl implements PatientService {
         List<Patient> patients=new ArrayList<>();
 
         try{
-            patients=patientRepository.findAllByLastName(lastName);
+            patients=patientRepository.findAllByLastNameContaining(lastName);
             return patients;
         }
         catch (Exception e){

@@ -6,10 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import pl.dietician.model.Patient;
 import pl.dietician.service.PatientService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class PatientController {
@@ -45,13 +47,28 @@ public class PatientController {
         return "index";
     }
 
-    @RequestMapping (value = "/find", method = RequestMethod.GET)
-    public String loadPatient(Model model, long id){
+    @RequestMapping (value = "/find-by-name", method = RequestMethod.POST)
+    public String loadPatientByName(Model model, @RequestParam String lastName){
 
-        Patient patient=patientService.findById(id);
+        List<Patient> patients=patientService.findAllByLastName(lastName);
 
-        model.addAttribute("patient", patient);
+        model.addAttribute("patients", patients);
 
-        return "patient-view";
+        model.addAttribute("query", lastName);
+
+        return "patient-search-result";
+    }
+
+
+    @RequestMapping (value = "/find-by-pesel", method = RequestMethod.POST)
+    public String loadPatientByPesel(Model model, @RequestParam String pesel){
+
+        List<Patient> patients=patientService.findAllByPeselContaining(pesel);
+
+        model.addAttribute("patients", patients);
+
+        model.addAttribute("query", pesel);
+
+        return "patient-search-result";
     }
 }

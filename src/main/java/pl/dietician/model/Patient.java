@@ -39,6 +39,7 @@ public class Patient {
 
     @Email
     @Getter @Setter
+    @Column (unique = true)
     private String email;
 
     @OneToMany
