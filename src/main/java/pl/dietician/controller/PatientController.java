@@ -17,6 +17,11 @@ public class PatientController {
     @Autowired
     PatientService patientService;
 
+    @RequestMapping("/patients")
+    public String patientsZone(){
+        return "patients-zone";
+    }
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String registerNewPatient(Model model){
 
@@ -38,5 +43,15 @@ public class PatientController {
         patientService.save(patient);
 
         return "index";
+    }
+
+    @RequestMapping (value = "/find", method = RequestMethod.GET)
+    public String loadPatient(Model model, long id){
+
+        Patient patient=patientService.findById(id);
+
+        model.addAttribute("patient", patient);
+
+        return "patient-view";
     }
 }

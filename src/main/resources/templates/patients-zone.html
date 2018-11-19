@@ -375,150 +375,47 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">Create new patient </h1>
+                    <h1 class="page-header">Patients zone</h1>
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
             <!-- /.row -->
 
             <div class="row">
+                <div class="col-lg-8">
 
-
-                <div class="col-lg-9">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            Registration Form
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <form role="form" th:action="@{/register}" th:object="${patient}" method="post">
-                                        <div class="form-group">
-                                            <label>First Name:</label>
-                                            <input class="form-control" placeholder="First name" type="text"
-                                                   th:field="*{name}" required="required" autofocus="autofocus">
-                                            <p class="help-block">Field required</p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Last Name:</label>
-                                            <input class="form-control" placeholder="Last name" type="text"
-                                                   th:field="*{lastName}" required="required" autofocus="autofocus">
-                                            <p class="help-block">Field required</p>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>PESEL:</label>
-                                            <input class="form-control" placeholder="PESEL"
-                                                   type="number" th:field="*{pesel}" required="required" autofocus="autofocus">
-                                            <p class="help-block">Field required</p>
-                                            <p th:if="${#fields.hasErrors('pesel')}" th:errors="*{pesel}">User error</p>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>Date of Birth:</label>
-                                            <input class="form-control"
-                                                   type="date" th:field="*{dateOfBirth}"  autofocus="autofocus">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label>E-mail:</label>
-                                            <input class="form-control"
-                                                   type="email" th:field="*{email}" autofocus="autofocus">
-                                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">User error</p>
-                                        </div>
-
-
-                                        <p>#####################################################</p>
-                                        <p> BELOW FEATURES ARE INACTIVE BUT CAN BE USED IF NEEDED</p>
-                                        <p>#####################################################</p>
-
-                                        <div class="form-group">
-                                            <label>Text area</label>
-                                            <textarea class="form-control" rows="3"></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Checkboxes</label>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="">Checkbox 1
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="">Checkbox 2
-                                                </label>
-                                            </div>
-                                            <div class="checkbox">
-                                                <label>
-                                                    <input type="checkbox" value="">Checkbox 3
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Inline Checkboxes</label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox">1
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox">2
-                                            </label>
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox">3
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Radio Buttons</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Inline Radio Buttons</label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>1
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                                            </label>
-                                            <label class="radio-inline">
-                                                <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                                            </label>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Selects</label>
-                                            <select class="form-control">
-                                                <option>1</option>
-                                                <option>2</option>
-                                                <option>3</option>
-                                                <option>4</option>
-                                                <option>5</option>
-                                            </select>
-                                        </div>
-
-                                        <button type="submit" value="Register" class="btn btn-primary">Submit</button>
-                                        <button type="reset" class="btn btn-danger">Reset</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <!-- /.row (nested) -->
-                        </div>
-                        <!-- /.panel-body -->
+                    <p> Choose the search criteria:</p>
+                    <div class="input-group custom-search-form">
+                        <input type="text" name="lastName" class="form-control" placeholder="Search by last name...">
+                        <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
                     </div>
-                    <!-- /.panel -->
+
+                    <div>
+                    <p>... or</p>
+                    </div>
+
+                    <div class="input-group custom-search-form">
+                        <input type="text" name="pesel" class="form-control" placeholder="Search by last PESEL...">
+                        <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                    </div><br>
+
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">Other options</div>
+                        <div class="panel-body">
+                            <ul class="nav">
+                                <a href="/register"><i class="fas fa-user-plus fa-fw"></i> Add patient </a>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.col-lg-12 -->
             </div>
         </div>
         <!-- /.container-fluid -->
