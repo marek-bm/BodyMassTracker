@@ -23,6 +23,11 @@
     <!-- Custom Fonts -->
     <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!--Jasny bootsrap http://www.jasny.net/bootstrap/getting-started/-->
+    <!--added for row link http://www.jasny.net/bootstrap/javascript/#rowlink -->
+    <link href="../vendor/bootstrap/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!--Font awsome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
@@ -115,23 +120,21 @@
                                                 </th>
                                             </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody data-link="row" class="rowlink">
                                             <tr class="gradeA odd" role="row"
                                                 th:if="${!patients.isEmpty()}"
                                                 th:each="patient: ${patients}">
-                                                <td class="sorting_1" th:text="${patient.name}"></td>
+                                                <td class="sorting_1">
+                                                    <a th:href="@{/show-patient/{id} (id=${patient.id})}">
+                                                        <span th:text="${patient.name}"></span>
+                                                    </a>
+                                                </td>
                                                 <td th:text="${patient.lastName}"></td>
                                                 <td th:text="${patient.pesel}"></td>
-                                                <td class="center">
-                                                    <!--Alternatievly instead of icon, action can be triggered by button-->
-                                                    <!--<form class=" button"-->
-                                                            <!--data-toggle="tooltip"-->
-                                                            <!--title="Click to edit user data"-->
-                                                          <!--th:action="@{/edit-patient/{id} (id=${patient.id})}"-->
-                                                          <!--method="get">-->
-                                                        <!--<input type="submit" value="edit">-->
-                                                    <!--</form>-->
-                                                    <a th:href="@{/edit-patient/{id} (id=${patient.id})}">
+                                                <td class="center rowlink-skip">
+                                                    <a th:href="@{/edit-patient/{id} (id=${patient.id})}"
+                                                       data-toggle="tooltip"
+                                                       title="Click to EDIT user's data">
                                                         <i class="center fas fa-user-edit"></i>
                                                     </a>
                                                 </td>
@@ -182,6 +185,9 @@
 
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
+
+<!--Jasny bootstrap-->
+<script src="../vendor/bootstrap/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
 
 </body>
 

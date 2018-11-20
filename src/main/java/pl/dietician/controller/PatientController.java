@@ -1,9 +1,11 @@
 package pl.dietician.controller;
 
+import org.hibernate.validator.constraints.pl.PESEL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +23,7 @@ public class PatientController {
 
     @RequestMapping("/patients")
     public String patientsZone(){
+
         return "patients-zone";
     }
 
@@ -41,7 +44,6 @@ public class PatientController {
         if(bindingResult.hasErrors()){
             return "forms/register-patient";
         }
-
         patientService.save(patient);
 
         return "index";
@@ -70,5 +72,26 @@ public class PatientController {
         model.addAttribute("query", pesel);
 
         return "patient-search-result";
+
+    }
+
+    @RequestMapping (value = "/edit-patient/{id}", method = RequestMethod.GET)
+    public String editPatient(@PathVariable long id, Model model){
+
+        Patient patient=patientService.findById(id);
+
+        model.addAttribute("patient", patient);
+
+        return "forms/edit-patient";
+    }
+
+    @RequestMapping (value = "/show-patient/{id}", method = RequestMethod.GET)
+    public String showPatientDetails(@PathVariable long id, Model model){
+
+        Patient patient=patientService.findById(id);
+
+        model.addAttribute("patient", patient);
+
+        return "patient-details";
     }
 }

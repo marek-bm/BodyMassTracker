@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!--Jasny bootsrap http://www.jasny.net/bootstrap/getting-started/-->
+    <!--added for row link http://www.jasny.net/bootstrap/javascript/#rowlink -->
+    <link href="../vendor/bootstrap/jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <!--Font awsome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <nav th:replace="fragments/navigation-menu::navigation"></nav>
+
+    <!-- Page Content -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Patient details</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class='fas fa-user-circle fa-3x'><span> Personal data</span></i>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>#</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Id</td>
+                                        <td th:text="${patient.id}"></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Name</td>
+                                        <td th:text="${patient.name}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Last name</td>
+                                        <td th:text="${patient.lastName}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>PESEL</td>
+                                        <td th:text="${patient.pesel}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Date of birth</td>
+                                        <td th:text="${patient.dateOfBirth}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+
+                        <div class="panel-footer">
+                            <span> here will be button to trigger results form </span>
+                        </div>
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class='fas fas fa-folder-open fa-3x'><span> History </span></i>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>#</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <!--<td>Id</td>-->
+                                        <!--<td th:text="${patient.id}"></td>-->
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-area-chart fa-3x"><span> Graph</span></i>
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="flot-chart">
+                                <div class="flot-chart-content" id="flot-line-chart-multi" style="padding: 0px; position: relative;"><canvas class="flot-base" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 679px; height: 400px;" width="679" height="400"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"><div style="position: absolute; max-width: 75px; top: 381px; left: 3px; text-align: center;" class="flot-tick-label tickLabel">Jan 2007</div><div style="position: absolute; max-width: 75px; top: 381px; left: 91px; text-align: center;" class="flot-tick-label tickLabel">Apr 2007</div><div style="position: absolute; max-width: 75px; top: 381px; left: 183px; text-align: center;" class="flot-tick-label tickLabel">Jul 2007</div><div style="position: absolute; max-width: 75px; top: 381px; left: 272px; text-align: center;" class="flot-tick-label tickLabel">Oct 2007</div><div style="position: absolute; max-width: 75px; top: 381px; left: 363px; text-align: center;" class="flot-tick-label tickLabel">Jan 2008</div><div style="position: absolute; max-width: 75px; top: 381px; left: 453px; text-align: center;" class="flot-tick-label tickLabel">Apr 2008</div><div style="position: absolute; max-width: 75px; top: 381px; left: 544px; text-align: center;" class="flot-tick-label tickLabel">Jul 2008</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"><div style="position: absolute; top: 368px; left: 14px; text-align: right;" class="flot-tick-label tickLabel">0</div><div style="position: absolute; top: 307px; left: 8px; text-align: right;" class="flot-tick-label tickLabel">25</div><div style="position: absolute; top: 245px; left: 8px; text-align: right;" class="flot-tick-label tickLabel">50</div><div style="position: absolute; top: 184px; left: 8px; text-align: right;" class="flot-tick-label tickLabel">75</div><div style="position: absolute; top: 123px; left: 2px; text-align: right;" class="flot-tick-label tickLabel">100</div><div style="position: absolute; top: 62px; left: 2px; text-align: right;" class="flot-tick-label tickLabel">125</div><div style="position: absolute; top: 1px; left: 2px; text-align: right;" class="flot-tick-label tickLabel">150</div></div><div class="flot-y-axis flot-y2-axis yAxis y2Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"><div style="position: absolute; top: 368px; left: 644px;" class="flot-tick-label tickLabel">0.600€</div><div style="position: absolute; top: 307px; left: 644px;" class="flot-tick-label tickLabel">0.633€</div><div style="position: absolute; top: 245px; left: 644px;" class="flot-tick-label tickLabel">0.667€</div><div style="position: absolute; top: 184px; left: 644px;" class="flot-tick-label tickLabel">0.700€</div><div style="position: absolute; top: 123px; left: 644px;" class="flot-tick-label tickLabel">0.733€</div><div style="position: absolute; top: 62px; left: 644px;" class="flot-tick-label tickLabel">0.767€</div><div style="position: absolute; top: 1px; left: 644px;" class="flot-tick-label tickLabel">0.800€</div></div></div><canvas class="flot-overlay" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 679px; height: 400px;" width="679" height="400"></canvas><div class="legend"><div style="position: absolute; width: 138px; height: 33.3333px; bottom: 29px; left: 30px; background-color: rgb(255, 255, 255); opacity: 0.85;"> </div><table style="position:absolute;bottom:29px;left:30px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(237,194,64);overflow:hidden"></div></div></td><td class="legendLabel">Oil price ($)</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(175,216,248);overflow:hidden"></div></div></td><td class="legendLabel">USD/EUR exchange rate</td></tr></tbody></table></div></div>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+            </div>
+
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+</div>
+<!-- /#wrapper -->
+
+<!-- jQuery -->
+<script src="../vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="../dist/js/sb-admin-2.js"></script>
+
+<!--Jasny bootstrap-->
+<script src="../vendor/bootstrap/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+
+</body>
+
+</html>
