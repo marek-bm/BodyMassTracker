@@ -104,7 +104,85 @@
                         <!-- /.panel-body -->
 
                         <div class="panel-footer">
-                            <span> here will be button to trigger results form </span>
+
+                            <!-- Trigger the modal with a button -->
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add measurements</button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog modal-sm">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Body mass parameters</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form th:object="${bodyDataEmptyObj}" th:action="@{/save-data}" method="post">
+                                                <div class="form-group">
+                                                    <label>Height:</label>
+                                                    <input class="form-control" placeholder="height in cm" type="number"
+                                                           th:field="*{heightCm}" required="required" autofocus="autofocus">
+                                                    <p class="help-block">Field required</p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Weight:</label>
+                                                    <input class="form-control" placeholder="weight in kg" type="number"
+                                                           th:field="*{weightKg}" required="required" autofocus="autofocus">
+                                                    <p class="help-block">Field required</p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Fat mass [kg]:</label>
+                                                    <input class="form-control" placeholder="Fat mass, kg" type="number"
+                                                           th:field="*{fatMassKg}" required="required" autofocus="autofocus">
+                                                    <p class="help-block">Field required</p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Fat mass [%]:</label>
+                                                    <input class="form-control" placeholder="Fat mass, %" type="number"
+                                                           th:field="*{fatPercent}" required="required" autofocus="autofocus">
+                                                    <p class="help-block">Field required</p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Fat free mass [kg]:</label>
+                                                    <input class="form-control" placeholder="Fat free mass in kg" type="number"
+                                                           th:field="*{ffmMassKg}" required="required" autofocus="autofocus">
+                                                    <p class="help-block">Field required</p>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Fat free mass [%]:</label>
+                                                    <input class="form-control" placeholder="Fat free mass in %" type="number"
+                                                           th:field="*{ffmPercent}" required="required" autofocus="autofocus">
+                                                    <p class="help-block">Field required</p>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Date of analysis:</label>
+                                                    <input class="form-control" placeholder="Date" type="date"
+                                                           th:field="*{dateOfInspection}" required="required" autofocus="autofocus">
+                                                    <p class="help-block">Field required</p>
+                                                </div>
+                                                <!--<div class="form-group">-->
+                                                    <!--<label>BMI:</label>-->
+                                                    <!--<input class="form-control" placeholder="Fat free mass in %" type="number"-->
+                                                           <!--th:field="*{BMI}" autofocus="autofocus">-->
+                                                <!--</div>-->
+
+                                                <div>
+                                                    <input type="hidden" th:field="*{patient}">
+                                                    <input type="hidden" th:filed="*{dateOfInspection}">
+                                                </div>
+                                                <div>
+                                                    <button type="submit" class="btn btn-default">Submit</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <!-- /.panel -->
@@ -120,16 +198,20 @@
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>#</th>
+                                        <th>Date</th>
+                                        <th>Results</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <!--<td>Id</td>-->
-                                        <!--<td th:text="${patient.id}"></td>-->
+                                    <tbody th:if="${history}==null or ${history.isEmpty()}">
+                                        <tr>
+                                            <td colspan="2">No data to dispaly</td>
+                                        </tr>
+                                    </tbody>
+                                    <tbody th:if="${history}!=null or ${!history.isEmpty()}">
+                                    <tr th:each="item:${history}">
+                                        <td th:text="${item.dateOfInspection}"></td>
+                                        <td th:text="${item.toString()}"></td>
                                     </tr>
-
                                     </tbody>
                                 </table>
                             </div>

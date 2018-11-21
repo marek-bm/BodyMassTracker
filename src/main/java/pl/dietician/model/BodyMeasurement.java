@@ -26,6 +26,7 @@ public class BodyMeasurement {
     private Date dateOfInspection;
 
     @Getter @Setter
+    @Positive
     private int heightCm;
 
     @Getter @Setter
@@ -33,7 +34,7 @@ public class BodyMeasurement {
     private double weightKg;
 
     @Getter @Setter
-    @Min(value = 0) @Max(value = 1)
+    @Min(value = 0) @Max(value = 100)
     private double fatPercent;
 
     @Getter @Setter
@@ -41,13 +42,24 @@ public class BodyMeasurement {
     private double fatMassKg;
 
     @Getter @Setter
-    @Min(value = 0) @Max(value = 1)
+    @Min(value = 0) @Max(value = 100)
     private double ffmPercent; //fat free mass
 
     @Getter @Setter
     @Positive
     private double ffmMassKg;
 
-    @Positive
+//    @Positive
     private double BMI;
+
+//    public BodyMeasurement(){
+//        this.dateOfInspection=new Date();
+//    }
+
+    @Override
+    public String toString() {
+        return "id=" + id + ",height=" + heightCm + "cm, weight=" + weightKg + "kg"+ "\n"+
+                "fat=" + fatPercent + "%, fat mass=" + fatMassKg + "kg"+ "\n"+
+                "ffmPercent=" + ffmPercent + ",% ffmMassKg=" + ffmMassKg + ", BMI=" + BMI;
+    }
 }

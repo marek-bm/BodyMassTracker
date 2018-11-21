@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import pl.dietician.model.BodyMeasurement;
 import pl.dietician.model.Patient;
+import pl.dietician.service.BodyMeasurementService;
 import pl.dietician.service.PatientService;
 
 import javax.validation.Valid;
@@ -20,6 +22,9 @@ public class PatientController {
 
     @Autowired
     PatientService patientService;
+
+    @Autowired
+    BodyMeasurementService bodyMeasurementService;
 
     @RequestMapping("/patients")
     public String patientsZone(){
@@ -90,7 +95,17 @@ public class PatientController {
 
         Patient patient=patientService.findById(id);
 
+        List<BodyMeasurement> patientHistory=bodyMeasurementService.findAllByPatient(patient);
+
+        BodyMeasurement bodyData=new BodyMeasurement();
+
+        bodyData.setPatient(patient);
+
         model.addAttribute("patient", patient);
+
+        model.addAttribute("bodyDataEmptyObj", bodyData);
+
+        model.addAttribute("history", patientHistory);
 
         return "patient-details";
     }
