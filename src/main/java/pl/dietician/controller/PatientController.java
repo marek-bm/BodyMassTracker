@@ -1,14 +1,12 @@
 package pl.dietician.controller;
 
+import com.google.gson.Gson;
 import org.hibernate.validator.constraints.pl.PESEL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import pl.dietician.model.BodyMeasurement;
 import pl.dietician.model.Patient;
 import pl.dietician.service.BodyMeasurementService;
@@ -97,6 +95,10 @@ public class PatientController {
 
         List<BodyMeasurement> patientHistory=bodyMeasurementService.findAllByPatient(patient);
 
+        Gson gson=new Gson();
+
+        String gsonString=gson.toJson(patientHistory);
+
         BodyMeasurement bodyData=new BodyMeasurement();
 
         bodyData.setPatient(patient);
@@ -109,4 +111,22 @@ public class PatientController {
 
         return "patient-details";
     }
+
+
+
+    @RequestMapping (value = "/show/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public String showPatientDetailsJSON(@PathVariable long id){
+
+        Patient patient=patientService.findById(id);
+
+        List<BodyMeasurement> patientHistory=bodyMeasurementService.findAllByPatient(patient);
+
+        Gson gson=new Gson();
+
+        String gsonString=gson.toJson(patientHistory);
+
+        return gsonString;
+    }
+
 }

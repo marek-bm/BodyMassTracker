@@ -10,4 +10,9 @@ public class HomeController {
     public String loadHome(){
         return "home";
     }
+
+    @RequestMapping ("/")
+    public String loadIndex(){
+        return "index";
+    }
 }

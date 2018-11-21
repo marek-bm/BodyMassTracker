@@ -38,6 +38,33 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript" th:inline="javascript">
+        /*<![CDATA[*/
+
+        var d = /*[[${history}]]*/;
+
+        google.charts.load('current', {packages: ['corechart', 'line']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data=new google.visualization.arrayToDataTable();
+
+            var chart = new google.visualization.LineChart(document.getElementById('data_chart'));
+            chart.draw(data);
+
+        }
+        /*]]>*/
+    </script>
+
+
+
+
+
+
 </head>
 
 <body>
@@ -231,8 +258,9 @@
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
-                            <div class="flot-chart">
-                                <div class="flot-chart-content" id="flot-line-chart-multi" style="padding: 0px; position: relative;"><canvas class="flot-base" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 679px; height: 400px;" width="679" height="400"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"><div style="position: absolute; max-width: 75px; top: 381px; left: 3px; text-align: center;" class="flot-tick-label tickLabel">Jan 2007</div><div style="position: absolute; max-width: 75px; top: 381px; left: 91px; text-align: center;" class="flot-tick-label tickLabel">Apr 2007</div><div style="position: absolute; max-width: 75px; top: 381px; left: 183px; text-align: center;" class="flot-tick-label tickLabel">Jul 2007</div><div style="position: absolute; max-width: 75px; top: 381px; left: 272px; text-align: center;" class="flot-tick-label tickLabel">Oct 2007</div><div style="position: absolute; max-width: 75px; top: 381px; left: 363px; text-align: center;" class="flot-tick-label tickLabel">Jan 2008</div><div style="position: absolute; max-width: 75px; top: 381px; left: 453px; text-align: center;" class="flot-tick-label tickLabel">Apr 2008</div><div style="position: absolute; max-width: 75px; top: 381px; left: 544px; text-align: center;" class="flot-tick-label tickLabel">Jul 2008</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"><div style="position: absolute; top: 368px; left: 14px; text-align: right;" class="flot-tick-label tickLabel">0</div><div style="position: absolute; top: 307px; left: 8px; text-align: right;" class="flot-tick-label tickLabel">25</div><div style="position: absolute; top: 245px; left: 8px; text-align: right;" class="flot-tick-label tickLabel">50</div><div style="position: absolute; top: 184px; left: 8px; text-align: right;" class="flot-tick-label tickLabel">75</div><div style="position: absolute; top: 123px; left: 2px; text-align: right;" class="flot-tick-label tickLabel">100</div><div style="position: absolute; top: 62px; left: 2px; text-align: right;" class="flot-tick-label tickLabel">125</div><div style="position: absolute; top: 1px; left: 2px; text-align: right;" class="flot-tick-label tickLabel">150</div></div><div class="flot-y-axis flot-y2-axis yAxis y2Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px;"><div style="position: absolute; top: 368px; left: 644px;" class="flot-tick-label tickLabel">0.600€</div><div style="position: absolute; top: 307px; left: 644px;" class="flot-tick-label tickLabel">0.633€</div><div style="position: absolute; top: 245px; left: 644px;" class="flot-tick-label tickLabel">0.667€</div><div style="position: absolute; top: 184px; left: 644px;" class="flot-tick-label tickLabel">0.700€</div><div style="position: absolute; top: 123px; left: 644px;" class="flot-tick-label tickLabel">0.733€</div><div style="position: absolute; top: 62px; left: 644px;" class="flot-tick-label tickLabel">0.767€</div><div style="position: absolute; top: 1px; left: 644px;" class="flot-tick-label tickLabel">0.800€</div></div></div><canvas class="flot-overlay" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 679px; height: 400px;" width="679" height="400"></canvas><div class="legend"><div style="position: absolute; width: 138px; height: 33.3333px; bottom: 29px; left: 30px; background-color: rgb(255, 255, 255); opacity: 0.85;"> </div><table style="position:absolute;bottom:29px;left:30px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(237,194,64);overflow:hidden"></div></div></td><td class="legendLabel">Oil price ($)</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(175,216,248);overflow:hidden"></div></div></td><td class="legendLabel">USD/EUR exchange rate</td></tr></tbody></table></div></div>
+                            <div>
+                                <!--var data= new -->
+                                <div id="chart_div"></div>
                             </div>
                         </div>
                         <!-- /.panel-body -->
@@ -240,7 +268,6 @@
                     <!-- /.panel -->
                 </div>
             </div>
-
             <!-- /.container-fluid -->
         </div>
         <!-- /#page-wrapper -->
@@ -257,11 +284,24 @@
 <!-- Metis Menu Plugin JavaScript -->
 <script src="../vendor/metisMenu/metisMenu.min.js"></script>
 
+<!-- Morris Charts JavaScript -->
+<script src="../vendor/raphael/raphael.min.js"></script>
+<script src="../vendor/morrisjs/morris.min.js"></script>
+<script src="../data/morris-data.js"></script>
+
 <!-- Custom Theme JavaScript -->
 <script src="../dist/js/sb-admin-2.js"></script>
 
 <!--Jasny bootstrap-->
 <script src="../vendor/bootstrap/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+
+<!-- from https://dzone.com/articles/drawing-google-chart-servlet -->
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+<!--<script type="text/javascript" src="https://www.google.com/jsapi"></script>-->
+<!--below is for custom file -->
+<!--<script type="text/javascript" src="./js/visualization-chart-script.js"></script>-->
+
+
 
 </body>
 
