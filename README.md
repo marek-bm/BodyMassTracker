@@ -7,6 +7,7 @@ Technology incorporated
 <li>Spring Boot</li>
 <li>Spring Data JPA</li>
 <li>Spring MVC</li>
+ <li> JUnit test of repository </li>
 <li>Thymeleaf</li>
 <li>HTML + Bootstrap</li>
 <li>MySQL</li>
