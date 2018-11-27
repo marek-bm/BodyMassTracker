@@ -87,12 +87,12 @@
 
             // var data=google.visualization.arrayToDataTable(jsonData);
             var data = new google.visualization.DataTable();
-            data.addColumn('number', 'measurement');
+            data.addColumn('date', 'measurement');
             data.addColumn('number', 'weight');
 
             jsonData.forEach(function (row) {
                 data.addRow([
-                    row.id,
+                    new Date(row.dateOfInspection),
                     row.weightKg
                 ]);
             });
