@@ -50,65 +50,87 @@
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" th:inline="javascript">
-        // Load the Visualization API and the piechart package.
-        google.charts.load('current', {'packages': ['corechart']});
+        /*<![CDATA[*/
 
-        //Data sent from controller
         var jsonData = /*[[${history}]]*/ "empty";
 
-        //Data obtained from API - to test and compare results obtained by controller
-        var patientID = /*[[${patient.id}]]*/ "undefined";
-        var dataUrl = "/API/show-patient/" + patientID;
+        // var patientID=/*[[${patient.id}]]*/ "undefined";
+        //
+        // var dataUrl="/API/show-patient/"+patientID;
+        //
+        // //
+        // var xhr= new XMLHttpRequest();
+        // //conn.type, url, asynchron (true/false)
+        // xhr.open("GET", dataUrl, true);
+        //
+        // var jsonDataAPI;
+        //
+        // xhr.addEventListener('load', function (ev) {
+        //   if(this.status ===200){
+        //       console.log("Connection result: ");
+        //       console.log(this);
+        //       jsonDataAPI=JSON.parse(this.responseText);
+        //   }
+        //
+        // });
+        //
+        // xhr.addEventListener('error', function (e) {
+        //     console.log("Connection error");
+        // });
+        //
+        // xhr.send();
+        // console.log(xhr.response);
+        //
+        // var graphData= new DataTable();
+        // graphData.DataTable({
+        //     "data":jsonFromAPI,
+        //     "columns":[
+        //         {"date":"weight"},
+        //         {"date":"ffm"}
+        //     ]
+        // });
 
-        var jsonDataAPI;
-
-        var xhr = new XMLHttpRequest();
-        //conn.type, url, asynchron (true/false)
-        xhr.open("GET", dataUrl, true);
-
-
-        xhr.addEventListener('load', function (ev) {
-            if (this.status === 200) {
-                console.log("Connection result: ");
-                console.log(this);
-                jsonDataAPI = JSON.parse(this.responseText);
-            }
-        });
-        xhr.send();
-
-
-        // Set a callback to run when the Google Visualization API is loaded.
+        google.charts.load('current', {packages: ['corechart']});
         google.charts.setOnLoadCallback(drawChart);
 
-        // Callback that creates and populates a data table,
-        // instantiates the pie chart, passes in the data and
-        // draws it.
-        function drawChart() {
+        // function drawChart() {
+        //     var jsonData=$.ajax(
+        //         {url:dataUrl,
+        //         dataType:"json",
+        //         async:"false"}
+        //     ).responseText;
 
-            // var data=google.visualization.arrayToDataTable(jsonData);
-            var data = new google.visualization.DataTable();
-            data.addColumn('number', 'measurement');
-            data.addColumn('number', 'weight');
+        // Create our data table out of JSON data loaded from server.
+        var data = new google.visualization.DataTable(jsonData);
 
-            jsonData.forEach(function (row) {
-                data.addRow([
-                    row.id,
-                    row.weightKg
-                ]);
-            });
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, {width: 400, height: 240});
 
-            // Set chart options
-            var options = {
-                'title': 'Body Mass Parameters',
-                'width': 400,
-                'height': 300
-            };
+        var options = {
+            'title': 'How Much Pizza I Ate Last Night',
+            'width': 400,
+            'height': 300
+        };
 
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
+
+        // var data= new google.visualization.DataTable(jsonDataAPI)
+        // var dataView = google.visualization.DataView.fromJSON(data, viewAsJson)
+        // dataView.addColumn('date','dateOfInspection');
+        // dataView.addColumn('number', 'weightKg');
+        //
+        // jsonDataAPI.forEach(function (row) {
+        //     dataView.addRow([
+        //         row.dateOfInspection,
+        //         row.weightKg
+        //     ]);
+        // });
+
+        // Instantiate and draw the chart.
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(chart, options);
         }
 
+        /*]]>*/
     </script>
 
 </head>
@@ -235,9 +257,9 @@
                                                     <p class="help-block">Field required</p>
                                                 </div>
                                                 <!--<div class="form-group">-->
-                                                    <!--<label>BMI:</label>-->
-                                                    <!--<input class="form-control" placeholder="Fat free mass in %" type="number"-->
-                                                           <!--th:field="*{BMI}" autofocus="autofocus">-->
+                                                <!--<label>BMI:</label>-->
+                                                <!--<input class="form-control" placeholder="Fat free mass in %" type="number"-->
+                                                <!--th:field="*{BMI}" autofocus="autofocus">-->
                                                 <!--</div>-->
 
                                                 <div>
@@ -276,9 +298,9 @@
                                     </tr>
                                     </thead>
                                     <tbody th:if="${history}==null or ${history.isEmpty()}">
-                                        <tr>
-                                            <td colspan="2">No data to dispaly</td>
-                                        </tr>
+                                    <tr>
+                                        <td colspan="2">No data to dispaly</td>
+                                    </tr>
                                     </tbody>
                                     <tbody th:if="${history}!=null or ${!history.isEmpty()}">
                                     <tr th:each="item:${history}">
@@ -340,6 +362,15 @@
 
 <!--Jasny bootstrap-->
 <script src="../vendor/bootstrap/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+
+
+<!--from https://dzone.com/articles/drawing-google-chart-servlet -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<!--below is for custom file -->
+<script type="text/javascript" src="./js/visualization-chart-script.js"></script>
+
+
 
 </body>
 
