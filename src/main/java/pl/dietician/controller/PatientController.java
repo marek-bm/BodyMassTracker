@@ -114,7 +114,7 @@ public class PatientController {
 
 
 
-    @RequestMapping (value = "/API/show-patient/{id}", method = RequestMethod.GET)
+    @RequestMapping (value = "/api/show-patient/{id}", method = RequestMethod.GET)
     @ResponseBody
     public String showPatientDetailsJSON(@PathVariable long id){
 
