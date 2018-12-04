@@ -72,32 +72,55 @@
             var data = new google.visualization.DataTable();
             data.addColumn('date', 'measurement');
             data.addColumn('number', 'weight');
+            data.addColumn('number', 'Fat kg');
+            data.addColumn('number', 'FFM kg');
+            data.addColumn('number', 'Fat %');
 
             jsonData.forEach(function (row) {
                 data.addRow([
                     new Date(row.dateOfInspection),
-                    row.weightKg
+                    row.weightKg,
+                    row.fatMassKg,
+                    row.ffmMassKg,
+                    row.fatPercent,
                 ]);
             });
 
             // Set chart options
             var options = {
-                'title': 'Body Mass Parameters',
+                // 'title': 'Body Mass Parameters',
                 // 'width': 400,
                 'height': 500,
-                vAxis: {
-                    viewWindow: {
-                        min: 0
+                vAxes: { 0:{
+                        viewWindow: {
+                            min: 0,
+                        },
+                        title: 'Mass [kg]'
+                }, 1: {
+                        viewWindow: {
+                            min: 0,
+                        },
+                        title: 'Mass percentage [%]',
+                        ticks: [0, 25, 50, 75, 100] // display labels every 25
                     }
 
-                    // ticks: [0, 25, 50, 75, 100] // display labels every 25
+
                 },
 
                 hAxis:{
                     viewWindowMode:'pretty',
-                    pointSize: 20,
-                    pointShape: 'square'
-                }
+                    title: 'Date measured'
+                },
+
+                series: {
+                    0:{targetAxisIndex:0},
+                    1:{targetAxisIndex:0},
+                    2:{targetAxisIndex:0},
+                    3:{targetAxisIndex:1},
+                },
+
+                pointSize: 7,
+                pointFillColors: ['#a52714', '#097138']
             };
 
             // Instantiate and draw our chart, passing in some options.
@@ -297,7 +320,7 @@
                 <div class="col-lg-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-area-chart fa-3x"><span> Graph</span></i>
+                            <i class="fa fa-area-chart fa-3x"><span> Body Mass Parameters </span></i>
                         </div>
                         <!-- /.panel-heading -->
                         <div class="panel-body">
