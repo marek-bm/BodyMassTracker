@@ -13,6 +13,6 @@ public class HomeController {
 
     @RequestMapping ("/")
     public String loadIndex(){
-        return "index";
+        return "home";
     }
 }
