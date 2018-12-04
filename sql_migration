@@ -1,0 +1,89 @@
+-- ----------------------------------------------------------------------------
+-- MySQL Workbench Migration
+-- Migrated Schemata: diet
+-- Source Schemata: diet
+-- Created: Tue Dec  4 18:11:16 2018
+-- Workbench Version: 6.3.8
+-- ----------------------------------------------------------------------------
+
+SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------------------------------------------------------
+-- Schema diet
+-- ----------------------------------------------------------------------------
+DROP SCHEMA IF EXISTS `diet` ;
+CREATE SCHEMA IF NOT EXISTS `diet` ;
+
+-- ----------------------------------------------------------------------------
+-- Table diet.body_measurement
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `diet`.`body_measurement` (
+  `id` BIGINT(20) NOT NULL,
+  `date_of_inspection` DATE NULL DEFAULT NULL,
+  `fat_mass_kg` DOUBLE NOT NULL,
+  `fat_percent` DOUBLE NOT NULL,
+  `ffm_mass_kg` DOUBLE NOT NULL,
+  `ffm_percent` DOUBLE NOT NULL,
+  `height_cm` INT(11) NOT NULL,
+  `weight_kg` DOUBLE NOT NULL,
+  `patient_id` BIGINT(20) NULL DEFAULT NULL,
+  `bmi` DOUBLE NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `FKel8qplcu1ccm6l6c3yva5583t` (`patient_id` ASC))
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = latin1;
+
+-- ----------------------------------------------------------------------------
+-- Table diet.hibernate_sequence
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `diet`.`hibernate_sequence` (
+  `next_val` BIGINT(20) NULL DEFAULT NULL)
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = latin1;
+
+-- ----------------------------------------------------------------------------
+-- Table diet.patient
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `diet`.`patient` (
+  `id` BIGINT(20) NOT NULL,
+  `date_of_birth` DATE NULL DEFAULT NULL,
+  `email` VARCHAR(255) NULL DEFAULT NULL,
+  `last_name` VARCHAR(255) NULL DEFAULT NULL,
+  `name` VARCHAR(255) NULL DEFAULT NULL,
+  `pesel` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = latin1;
+
+-- ----------------------------------------------------------------------------
+-- Table diet.patient_body_measurements
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `diet`.`patient_body_measurements` (
+  `patient_id` BIGINT(20) NOT NULL,
+  `body_measurements_id` BIGINT(20) NOT NULL,
+  UNIQUE INDEX `UK_2yb1ir1i2ks44h63gv8byo46e` (`body_measurements_id` ASC),
+  INDEX `FKbb4vrg9f4f31bn93fbgr5rdh0` (`patient_id` ASC))
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = latin1;
+
+-- ----------------------------------------------------------------------------
+-- Table diet.patient_roles
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `diet`.`patient_roles` (
+  `patient_id` BIGINT(20) NOT NULL,
+  `roles_role_id` INT(11) NOT NULL,
+  PRIMARY KEY (`patient_id`, `roles_role_id`),
+  INDEX `FK40n57p3qsu2xhb8h59j80nsku` (`roles_role_id` ASC))
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = latin1;
+
+-- ----------------------------------------------------------------------------
+-- Table diet.role
+-- ----------------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `diet`.`role` (
+  `role_id` INT(11) NOT NULL,
+  `role` VARCHAR(255) NULL DEFAULT NULL,
+  PRIMARY KEY (`role_id`))
+ENGINE = MyISAM
+DEFAULT CHARACTER SET = latin1;
+SET FOREIGN_KEY_CHECKS = 1;

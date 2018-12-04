@@ -49,7 +49,7 @@ public class PatientController {
         }
         patientService.save(patient);
 
-        return "index";
+        return "home";
     }
 
     @RequestMapping (value = "/find-by-name", method = RequestMethod.POST)
