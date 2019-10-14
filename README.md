@@ -1,5 +1,5 @@
 # BodyMassTracker
-//project interrupted
+//project interrupted <br>
 Could be used for in a small dietetician business to track patients pody parameters (feature available) 
 Service can be adjusted to store custom data of patient's body mass parameters (weigh, height, fat, muscle etc).
 As next phase it could be improved by adding diet zone, wich currently is only mock.
